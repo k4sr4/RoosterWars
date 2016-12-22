@@ -17,7 +17,7 @@ public class HighSpeedCollision : MonoBehaviour
     void Update()
     {        
         currPosition = transform.position;
-        print(currPosition.x);
+        //print(currPosition.x);
         if (currPosition.x < -7.5)
         {            
             canMove = false;
