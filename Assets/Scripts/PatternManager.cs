@@ -8,6 +8,9 @@ public class PatternManager : MonoBehaviour {
     public int hp = 100;
     public int mana = 30;
     public Text hpText, manaText;
+    public Slider manaSlider;
+    public Slider healthSlider;
+    public GameObject manaHandle, healthHandle, manaFill, healthFill;
 
     public int state = 1;
 
@@ -79,7 +82,14 @@ public class PatternManager : MonoBehaviour {
 	void Update () {
         hpText.text = hp.ToString();
         manaText.text = mana.ToString();
-	}
+        manaSlider.value = mana;
+
+        if (mana == 0)
+        {
+            manaHandle.SetActive(false);
+            manaFill.SetActive(false);
+        }
+    }
 
     IEnumerator GenerateBullets()
     {
@@ -88,7 +98,7 @@ public class PatternManager : MonoBehaviour {
         {
             for (float j = 0; j < 9; j += 1.8f)
             {
-                x = Random.Range(-i - 9f, -i - 8f);
+                x = -8f;
                 y = Random.Range(j, j + 1.8f);
 
                 Instantiate(bullet, new Vector2(x, y - 4.5f), Quaternion.identity);

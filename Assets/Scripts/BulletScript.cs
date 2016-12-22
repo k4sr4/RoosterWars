@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BulletScript : MonoBehaviour {
 
@@ -33,7 +34,9 @@ public class BulletScript : MonoBehaviour {
             if (playerHP > 0)
                 GameObject.FindGameObjectWithTag("Manager").GetComponent<PatternManager>().hp -= hpDamage;
             if (playerMana > 0)
-                GameObject.FindGameObjectWithTag("Manager").GetComponent<PatternManager>().mana -= manaDamage;
+            {
+                GameObject.FindGameObjectWithTag("Manager").GetComponent<PatternManager>().mana -= manaDamage;                
+            }
             Destroy(this.gameObject);
         }
 
