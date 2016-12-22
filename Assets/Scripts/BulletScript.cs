@@ -7,15 +7,11 @@ public class BulletScript : MonoBehaviour {
 
     public float maxSpeed, minSpeed;
     float speed = 1;
-    public Sprite[] sprites;
 
     public int manaDamage = 10;
     public int hpDamage = 10;    
 
     void Start() {
-        int i = Random.Range(0, 4);
-        GetComponent<SpriteRenderer>().sprite = sprites[i];
-
         speed = Random.Range(minSpeed, maxSpeed);
     }
 

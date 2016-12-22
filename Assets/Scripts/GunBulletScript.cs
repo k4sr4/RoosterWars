@@ -5,16 +5,9 @@ using UnityEngine;
 public class GunBulletScript : MonoBehaviour {
 
     public float speed = 1;
-    public Sprite[] sprites;
 
     public int manaDamage = 10;
     public int hpDamage = 10;
-
-    void Start()
-    {
-        int i = Random.Range(0, 4);
-        GetComponent<SpriteRenderer>().sprite = sprites[i];
-    }
 
     // Update is called once per frame
     void Update()

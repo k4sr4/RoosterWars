@@ -69,7 +69,9 @@ public class PatternManager : MonoBehaviour {
 
         if (state == 4)
         {
-            Instantiate(gun, new Vector2(-7.7f, 0f), Quaternion.identity);
+            GameObject gun1 = Instantiate(gun, new Vector2(-7.7f, 0f), Quaternion.identity);
+            GameObject gun2 = Instantiate(gun, new Vector2(-7.7f, 0f), Quaternion.identity);
+            gun2.GetComponent<GunScript>().goUp = false;
         }
 
         if(state == 5)

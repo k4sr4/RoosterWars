@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GunScript : MonoBehaviour {
 
-    bool goUp = true;
+    public bool goUp = true;
     public float speed = 2f;
     public GameObject bullet;
     public int shootDelay = 10;
