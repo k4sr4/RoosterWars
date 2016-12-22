@@ -29,6 +29,10 @@ public class PatternManager : MonoBehaviour {
 
     public GameObject gun;
 
+    public GameObject[] bombs;
+    int bombNum = 0;
+    public float bombTime = 1f;
+
 	// Use this for initialization
 	void Start () {
         if (state == 1) {                       
@@ -67,7 +71,7 @@ public class PatternManager : MonoBehaviour {
 
         if(state == 5)
         {
-
+            StartCoroutine("GenerateBomb");
         }
 	}
 	
@@ -222,5 +226,14 @@ public class PatternManager : MonoBehaviour {
         {
             StartCoroutine("GenerateFire");
         }
+    }
+
+    IEnumerator GenerateBomb()
+    {
+        Instantiate(bombs[bombNum], bombs[bombNum].transform.position, Quaternion.identity);
+        bombNum++;
+        yield return new WaitForSeconds(bombTime);
+        if (bombNum < bombs.Length)
+            StartCoroutine("GenerateBomb");
     }
 }
