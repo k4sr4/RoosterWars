@@ -32,7 +32,7 @@ public class PatternManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //state = Random.Range(1, 6);
+        state = Random.Range(1, 6);
 
         if (state == 1) {                       
             StartCoroutine("GenerateBullets");            

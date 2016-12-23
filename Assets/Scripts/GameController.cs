@@ -79,7 +79,7 @@ public class GameController : MonoBehaviour {
         }
         else if (!myTurn && !pattern.activeInHierarchy)
         {
-            manaGain.GetComponent<Text>().text = mana.ToString();
+            manaGain.GetComponent<Text>().text = "+" + mana.ToString();
             manaGain.SetActive(true);
 
             if (damage == 0)

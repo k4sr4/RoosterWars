@@ -8,6 +8,8 @@ public class ButtonController : MonoBehaviour {
     public int[] damage;
     public int[] manaCost;
 
+    //public GameObject rooster;
+
     public void Attack(int index)
     {                
         if (manaCost[index] <= GameObject.FindGameObjectWithTag("Manager").GetComponent<GameController>().totalMana)
@@ -52,6 +54,16 @@ public class ButtonController : MonoBehaviour {
         {
             StartCoroutine("Cross");
         }
+
+        //Mammad
+        //if (index == 0)
+        //{
+        //    rooster.GetComponent<Animator>().SetTrigger("Punch");
+        //}
+        //else if (index == 1)
+        //{
+
+        //}
     }
 
     IEnumerator Cross()

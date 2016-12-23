@@ -46,6 +46,15 @@ public class BombScript : MonoBehaviour {
 
             if (bombNum == 7)
                 transform.Translate(Vector2.up * speed * Time.deltaTime);
+
+            if (bombNum == 8)
+                transform.Translate(Vector2.down * speed * Time.deltaTime);
+
+            if (bombNum == 9)
+                transform.Translate(Vector2.left * speed * Time.deltaTime);
+
+            if (bombNum == 10)
+                transform.Translate(new Vector2(1f, 1f) * speed * Time.deltaTime);
         }
 
         if (!GetComponent<SpriteRenderer>().enabled)
@@ -68,6 +77,7 @@ public class BombScript : MonoBehaviour {
             }
             if (playerMana > 0)
                 GameObject.FindGameObjectWithTag("Manager").GetComponent<GameController>().mana -= manaDamage;
+
             Destroy(this.gameObject);
         }
     }

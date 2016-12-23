@@ -34,5 +34,5 @@ public class MoveAvatar : MonoBehaviour {
             transform.position = curPosition;
             scanPos = curPosition;
         }
-    }
+    }    
 }
