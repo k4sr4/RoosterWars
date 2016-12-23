@@ -32,7 +32,7 @@ public class PatternManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        state = Random.Range(1, 6);
+        //state = Random.Range(1, 6);
 
         if (state == 1) {                       
             StartCoroutine("GenerateBullets");            
@@ -127,7 +127,7 @@ public class PatternManager : MonoBehaviour {
             s.transform.parent = gameObject.transform;
 
             yield return new WaitForSeconds(timeInterval2);
-            for (float x = -7.5f; x < 8.5f; x++)
+            for (float x = -7.5f; x < 8.5f; x += 2)
             {
                 for (float y = 4.5f; y > -5.5f; y--)
                 {
@@ -157,7 +157,7 @@ public class PatternManager : MonoBehaviour {
             yield return new WaitForSeconds(timeInterval2);
             for (float x = -7.5f; x < 8.5f; x++)
             {
-                for (float y = 4.5f; y > -5.5f; y--)
+                for (float y = 4.5f; y > -5.5f; y-=2)
                 {
                     if (y == 1.5)
                     {
@@ -183,7 +183,7 @@ public class PatternManager : MonoBehaviour {
             s.transform.parent = gameObject.transform;
 
             yield return new WaitForSeconds(timeInterval2);
-            for (float x = -7.5f; x < 8.5f; x++)
+            for (float x = -7.5f; x < 8.5f; x+=2)
             {
                 for (float y = 4.5f; y > -5.5f; y--)
                 {
@@ -213,7 +213,7 @@ public class PatternManager : MonoBehaviour {
             yield return new WaitForSeconds(timeInterval2);
             for (float x = -7.5f; x < 8.5f; x++)
             {
-                for (float y = 4.5f; y > -5.5f; y--)
+                for (float y = 4.5f; y > -5.5f; y-=2)
                 {
                     if (y == -1.5)
                     {

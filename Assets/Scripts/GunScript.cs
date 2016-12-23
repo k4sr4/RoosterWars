@@ -5,10 +5,11 @@ using UnityEngine;
 public class GunScript : MonoBehaviour {
 
     public bool goUp = true;
-    public float speed = 2f;
+    public float speed = 4f;
     public GameObject bullet;
     public int shootDelay = 10;
     int initialDelay;
+    int t = 0;
     List<GameObject> bullets = new List<GameObject>();
 
 	// Use this for initialization
@@ -25,10 +26,13 @@ public class GunScript : MonoBehaviour {
             goUp = true;
 
         if (goUp)
-            transform.Translate(Vector2.up * speed * Time.deltaTime);
+            //transform.Translate(Vector2.up * speed * Time.deltaTime);
+            transform.position = new Vector2(-8, Mathf.Sin(t) * speed*4.1f);
         else
-            transform.Translate(Vector2.down * speed * Time.deltaTime);
+            //transform.Translate(Vector2.down * speed * Time.deltaTime);
+            transform.position = new Vector2(-8, Mathf.Sin(t) * -speed*4.1f);
 
+        t++;
         shootDelay--;
 
         if (shootDelay == 0)

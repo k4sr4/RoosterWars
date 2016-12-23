@@ -23,7 +23,7 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        coroutine = Wait(5f);
+        coroutine = Wait(3f);
         StartCoroutine(coroutine);
 	}
 	
@@ -34,6 +34,18 @@ public class GameController : MonoBehaviour {
 
         if (hp < 0)
             hp = 0;
+
+        if (enemyHp < 0)
+            enemyHp = 0;
+
+        if (totalMana > 100)
+            totalMana = 100;
+
+        if (hp > 100)
+            hp = 100;
+
+        if (enemyHp > 100)
+            enemyHp = 100;
 
         hpText.text = hp.ToString();
         enemyHPText.text = enemyHp.ToString();
