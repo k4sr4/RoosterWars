@@ -11,13 +11,13 @@ public class FireScript : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            int playerHP = GameObject.FindGameObjectWithTag("Manager").GetComponent<PatternManager>().hp;
-            int playerMana = GameObject.FindGameObjectWithTag("Manager").GetComponent<PatternManager>().mana;
+            int playerHP = GameObject.FindGameObjectWithTag("Manager").GetComponent<GameController>().hp;
+            int playerMana = GameObject.FindGameObjectWithTag("Manager").GetComponent<GameController>().mana;
 
             if (playerHP > 0)
-                GameObject.FindGameObjectWithTag("Manager").GetComponent<PatternManager>().hp -= hpDamage;
+                GameObject.FindGameObjectWithTag("Manager").GetComponent<GameController>().hp -= hpDamage;
             if (playerMana > 0)
-                GameObject.FindGameObjectWithTag("Manager").GetComponent<PatternManager>().mana -= manaDamage;
+                GameObject.FindGameObjectWithTag("Manager").GetComponent<GameController>().mana -= manaDamage;
             Destroy(this.gameObject);
         }
     }

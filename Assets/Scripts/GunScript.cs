@@ -9,6 +9,7 @@ public class GunScript : MonoBehaviour {
     public GameObject bullet;
     public int shootDelay = 10;
     int initialDelay;
+    List<GameObject> bullets = new List<GameObject>();
 
 	// Use this for initialization
 	void Start () {
@@ -32,8 +33,16 @@ public class GunScript : MonoBehaviour {
 
         if (shootDelay == 0)
         {
-            Instantiate(bullet, transform.position, Quaternion.identity);
+            GameObject b = Instantiate(bullet, transform.position, Quaternion.identity);
+            bullets.Add(b);
             shootDelay = initialDelay;
+        }
+    }
+
+    void OnDestroy(){
+        for (int i = 0; i < bullets.Count; i++)
+        {
+            Destroy(bullets[i].gameObject);
         }
     }
 }

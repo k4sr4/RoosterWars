@@ -3,16 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PatternManager : MonoBehaviour {
-
-    public int hp = 100;
-    public int mana = 30;
-    public Text hpText, manaText;
-    public Slider manaSlider;
-    public Slider healthSlider;
-    public GameObject manaHandle, healthHandle, manaFill, healthFill;
-
+public class PatternManager : MonoBehaviour {   
     public int state = 1;
+    public float[] time;
+    public int[] mana;
 
     public GameObject bullet;
     public int bulletNum = 5;
@@ -38,6 +32,8 @@ public class PatternManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        state = Random.Range(1, 6);
+
         if (state == 1) {                       
             StartCoroutine("GenerateBullets");            
         }
@@ -63,7 +59,8 @@ public class PatternManager : MonoBehaviour {
                     y = Random.Range(1f, 4.5f);
                 }
 
-                Instantiate(rocket, new Vector2(x, y), Quaternion.identity);
+                GameObject r = Instantiate(rocket, new Vector2(x, y), Quaternion.identity);
+                r.transform.parent = gameObject.transform;
             }
         }
 
@@ -72,25 +69,30 @@ public class PatternManager : MonoBehaviour {
             GameObject gun1 = Instantiate(gun, new Vector2(-7.7f, 0f), Quaternion.identity);
             GameObject gun2 = Instantiate(gun, new Vector2(-7.7f, 0f), Quaternion.identity);
             gun2.GetComponent<GunScript>().goUp = false;
+            gun1.transform.parent = gameObject.transform;
+            gun2.transform.parent = gameObject.transform;
         }
 
         if(state == 5)
         {
             StartCoroutine("GenerateBomb");
         }
+
+        GameObject.FindGameObjectWithTag("Manager").GetComponent<GameController>().mana = mana[state - 1];
+        GameObject.FindGameObjectWithTag("Manager").GetComponent<GameController>().manaSlider.maxValue = mana[state - 1];
+        StartCoroutine("SessionTime");
 	}
+
+    IEnumerator SessionTime()
+    {
+        yield return new WaitForSeconds(time[state - 1]);
+        GameObject.FindGameObjectWithTag("Manager").GetComponent<GameController>().myTurn = false;
+        Destroy(this.gameObject);
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        hpText.text = hp.ToString();
-        manaText.text = mana.ToString();
-        manaSlider.value = mana;
-
-        if (mana == 0)
-        {
-            manaHandle.SetActive(false);
-            manaFill.SetActive(false);
-        }
+        
     }
 
     IEnumerator GenerateBullets()
@@ -103,7 +105,8 @@ public class PatternManager : MonoBehaviour {
                 x = -8f;
                 y = Random.Range(j, j + 1.8f);
 
-                Instantiate(bullet, new Vector2(x, y - 4.5f), Quaternion.identity);
+                GameObject b = Instantiate(bullet, new Vector2(x, y - 4.5f), Quaternion.identity);
+                b.transform.parent = gameObject.transform;
             }
         }
 
@@ -121,6 +124,7 @@ public class PatternManager : MonoBehaviour {
         {            
             GameObject s = Instantiate(safeZone, new Vector2(-4f, 2f), Quaternion.identity);          
             safeZones.Add(s);
+            s.transform.parent = gameObject.transform;
 
             yield return new WaitForSeconds(timeInterval2);
             for (float x = -7.5f; x < 8.5f; x++)
@@ -140,6 +144,7 @@ public class PatternManager : MonoBehaviour {
 
                     GameObject f = Instantiate(fire, new Vector2(x, y), Quaternion.identity);
                     fires.Add(f);
+                    f.transform.parent = gameObject.transform;
                 }
             }
         }
@@ -147,6 +152,7 @@ public class PatternManager : MonoBehaviour {
         {
             GameObject s = Instantiate(safeZone, new Vector2(4f, 2f), Quaternion.identity);
             safeZones.Add(s);
+            s.transform.parent = gameObject.transform;
 
             yield return new WaitForSeconds(timeInterval2);
             for (float x = -7.5f; x < 8.5f; x++)
@@ -166,6 +172,7 @@ public class PatternManager : MonoBehaviour {
 
                     GameObject f = Instantiate(fire, new Vector2(x, y), Quaternion.identity);
                     fires.Add(f);
+                    f.transform.parent = gameObject.transform;
                 }
             }
         }
@@ -173,6 +180,7 @@ public class PatternManager : MonoBehaviour {
         {
             GameObject s = Instantiate(safeZone, new Vector2(4f, -2f), Quaternion.identity);
             safeZones.Add(s);
+            s.transform.parent = gameObject.transform;
 
             yield return new WaitForSeconds(timeInterval2);
             for (float x = -7.5f; x < 8.5f; x++)
@@ -192,6 +200,7 @@ public class PatternManager : MonoBehaviour {
 
                     GameObject f = Instantiate(fire, new Vector2(x, y), Quaternion.identity);
                     fires.Add(f);
+                    f.transform.parent = gameObject.transform;
                 }
             }
         }
@@ -199,6 +208,7 @@ public class PatternManager : MonoBehaviour {
         {
             GameObject s = Instantiate(safeZone, new Vector2(-4f, -2f), Quaternion.identity);
             safeZones.Add(s);
+            s.transform.parent = gameObject.transform;
 
             yield return new WaitForSeconds(timeInterval2);
             for (float x = -7.5f; x < 8.5f; x++)
@@ -218,6 +228,7 @@ public class PatternManager : MonoBehaviour {
 
                     GameObject f = Instantiate(fire, new Vector2(x, y), Quaternion.identity);
                     fires.Add(f);
+                    f.transform.parent = gameObject.transform;
                 }
             }
         }
@@ -243,6 +254,7 @@ public class PatternManager : MonoBehaviour {
     IEnumerator GenerateBomb()
     {
         Instantiate(bombs[bombNum], bombs[bombNum].transform.position, Quaternion.identity);
+        //bombs[bombNum].transform.parent = gameObject.transform;
         bombNum++;
         yield return new WaitForSeconds(bombTime);
         if (bombNum < bombs.Length)
