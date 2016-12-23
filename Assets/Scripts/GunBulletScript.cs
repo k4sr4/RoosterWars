@@ -23,7 +23,10 @@ public class GunBulletScript : MonoBehaviour {
             int playerMana = GameObject.FindGameObjectWithTag("Manager").GetComponent<GameController>().mana;
 
             if (playerHP > 0)
+            {
                 GameObject.FindGameObjectWithTag("Manager").GetComponent<GameController>().hp -= hpDamage;
+                GameObject.FindGameObjectWithTag("Manager").GetComponent<GameController>().damage += hpDamage;
+            }
             if (playerMana > 0)
                 GameObject.FindGameObjectWithTag("Manager").GetComponent<GameController>().mana -= manaDamage;
             Destroy(this.gameObject);

@@ -5,12 +5,15 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
     public int hp = 100;
+    public int enemyHp = 100;
     public int mana = 30;
     public int totalMana = 0;
-    public Text hpText, manaText;
+    public Text hpText, enemyHPText, manaText;
     public Slider manaSlider;
     public Slider healthSlider;
     public GameObject manaHandle, healthHandle, manaFill, healthFill;
+    public GameObject manaGain, hpLoss, enemyHPLoss, manaLoss;
+    public int damage = 0;
 
     public bool myTurn = true;
     public GameObject pattern;
@@ -33,6 +36,7 @@ public class GameController : MonoBehaviour {
             hp = 0;
 
         hpText.text = hp.ToString();
+        enemyHPText.text = enemyHp.ToString();
         manaText.text = totalMana.ToString();
         manaSlider.value = mana;
 
@@ -63,12 +67,31 @@ public class GameController : MonoBehaviour {
         }
         else if (!myTurn && !pattern.activeInHierarchy)
         {
+            manaGain.GetComponent<Text>().text = mana.ToString();
+            manaGain.SetActive(true);
+
+            if (damage == 0)
+                hpLoss.GetComponent<Text>().text = damage.ToString();
+            else
+                hpLoss.GetComponent<Text>().text = "-" + damage.ToString();
+
+            hpLoss.SetActive(true);
+            StartCoroutine("DisableTexts");
+
             slider.SetActive(false);
             totalMana += mana;
             print("Attack!");
         }
 
         StartCoroutine("WaitEndTurn");
+    }
+
+    IEnumerator DisableTexts()
+    {
+        yield return new WaitForSeconds(1.5f);
+        manaGain.SetActive(false);        
+        hpLoss.SetActive(false);
+        damage = 0;
     }
 
     IEnumerator WaitEndTurn()
